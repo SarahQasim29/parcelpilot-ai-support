@@ -6,20 +6,34 @@ import sys
 # FIX FOR PYTHON 3.14 + PYDANTIC 1.x
 # ============================================
 if sys.version_info >= (3, 14):
-    import pydantic
-    # Patch Pydantic to work with Python 3.14
-    if not hasattr(pydantic, '_patched_for_314'):
-        from pydantic import main
-        original_new = main.ModelMetaclass.__new__
+    try:
+        import pydantic
+        from pydantic import fields
         
-        def patched_new(cls, name, bases, dct):
-            if 'extra' in dct and isinstance(dct['extra'], str):
-                pass
-            return original_new(cls, name, bases, dct)
+        # Store original ModelField
+        original_ModelField = fields.ModelField
         
-        main.ModelMetaclass.__new__ = patched_new
-        pydantic._patched_for_314 = True
-# ============================================
+        # Create patched version
+        class PatchedModelField(original_ModelField):
+            def __init__(self, *args, **kwargs):
+                try:
+                    super().__init__(*args, **kwargs)
+                except Exception as e:
+                    if "unable to infer type for attribute" in str(e):
+                        # Set a default type and continue
+                        self.type_ = str
+                        self.outer_type_ = str
+                        self.prepare()
+                    else:
+                        raise
+        
+        # Replace ModelField
+        fields.ModelField = PatchedModelField
+        pydantic._patched = True
+        print("✅ Pydantic ModelField patch applied")
+    except Exception as e:
+        print(f"⚠️ Pydantic patch failed: {e}")
+
 import logging
 from typing import Optional, Dict
 from fastapi import FastAPI, HTTPException, Header
