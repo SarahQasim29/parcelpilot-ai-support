@@ -1,42 +1,42 @@
 # ============================================
-# CORE - WORKING ON PYTHON 3.14
+# CORE - PRE-COMPILED WHEELS
 # ============================================
-fastapi==0.115.6
-uvicorn[standard]==0.34.0
-python-dotenv==1.0.1
-pydantic==2.10.4
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-dotenv==1.0.0
+pydantic==2.5.0
 
 # ============================================
-# DATA PROCESSING - WORKING ON PYTHON 3.14
+# DATA PROCESSING - PRE-COMPILED
 # ============================================
-numpy==2.2.3
-pandas==2.2.3
-openpyxl==3.1.5
-pypdf==5.1.0
+numpy==1.24.3
+pandas==2.0.3
+openpyxl==3.1.2
+pypdf==3.17.0
 
 # ============================================
-# AI - WORKING ON PYTHON 3.14
+# AI - PRE-COMPILED
 # ============================================
-groq==1.2.0
-httpx==0.28.1
+groq==0.5.0
+httpx==0.27.0
 
 # ============================================
-# WEB - WORKING ON PYTHON 3.14
+# WEB - PRE-COMPILED
 # ============================================
-jinja2==3.1.5
-python-multipart==0.0.20
+jinja2==3.1.2
+python-multipart==0.0.6
 
 # ============================================
-# SECURITY - WORKING ON PYTHON 3.14
+# SECURITY - PRE-COMPILED
 # ============================================
 python-jose[cryptography]==3.3.0
 passlib[bcrypt]==1.7.4
 
 # ============================================
-# UTILITIES - WORKING ON PYTHON 3.14
+# UTILITIES - PRE-COMPILED
 # ============================================
-python-dateutil==2.9.0.post0
-tenacity==9.0.0
+python-dateutil==2.8.2
+tenacity==8.2.3
 
 # ============================================
 # COMMENTED OUT - NOT COMPATIBLE WITH PYTHON 3.14
