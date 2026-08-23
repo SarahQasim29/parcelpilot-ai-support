@@ -1,5 +1,4 @@
 # src/api/main.py
-import os
 import sys
 
 # ============================================
@@ -34,6 +33,7 @@ if sys.version_info >= (3, 14):
     except Exception as e:
         print(f"⚠️ Pydantic patch failed: {e}")
 
+import os
 import logging
 from typing import Optional, Dict
 from fastapi import FastAPI, HTTPException, Header
