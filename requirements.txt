@@ -1,13 +1,13 @@
 # ============================================
-# CORE - NO RUST COMPILATION NEEDED
+# CORE - COMPATIBLE VERSIONS
 # ============================================
-fastapi==0.104.1
+fastapi==0.95.0
 uvicorn[standard]==0.24.0
 python-dotenv==1.0.0
 pydantic==1.10.0
 
 # ============================================
-# DATA PROCESSING - PRE-COMPILED
+# DATA PROCESSING
 # ============================================
 openpyxl==3.1.2
 pypdf==3.17.0
