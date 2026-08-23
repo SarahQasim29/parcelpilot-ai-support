@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: parcelpilot-ai-support
+    runtime: python
+    repo: https://github.com/SarahQasim29/parcelpilot-ai-support
+    plan: free
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn src.api.main:app --host 0.0.0.0 --port $PORT
+    pythonVersion: 3.12.8
