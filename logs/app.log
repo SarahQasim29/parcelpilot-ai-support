@@ -1,0 +1,64 @@
+2026-08-22 21:46:42,664 - chromadb.telemetry.product.posthog - INFO - Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2026-08-22 21:46:44,542 - chromadb.telemetry.product.posthog - ERROR - Failed to send telemetry event ClientStartEvent: capture() takes 1 positional argument but 3 were given
+2026-08-22 21:46:44,635 - chromadb.telemetry.product.posthog - ERROR - Failed to send telemetry event ClientCreateCollectionEvent: capture() takes 1 positional argument but 3 were given
+2026-08-22 21:46:44,641 - src.data.ingestion - INFO - Vector store initialized at ./chroma_db
+2026-08-22 21:46:45,628 - src.data.ingestion - INFO - Loaded 1 pages from 01_Support_Policy_v3_CURRENT.pdf
+2026-08-22 21:46:45,764 - src.data.ingestion - INFO - Loaded 1 pages from 02_Support_Policy_v2_DEPRECATED.pdf
+2026-08-22 21:46:46,229 - src.data.ingestion - INFO - Loaded 1 pages from 03_Cancellation_and_Service_Credit_SOP_v4.pdf
+2026-08-22 21:46:46,452 - src.data.ingestion - INFO - Loaded 1 pages from 04_Product_Operations_Guide_and_Known_Issues.pdf
+2026-08-22 21:46:46,603 - src.data.ingestion - INFO - Loaded 1 pages from 05_Northstar_Logistics_Enterprise_Agreement.pdf
+2026-08-22 21:46:46,742 - src.data.ingestion - INFO - Loaded 1 pages from 06_LumenWorks_Service_Agreement.pdf
+2026-08-22 21:46:46,752 - src.data.ingestion - INFO - Split documents into 11 chunks
+2026-08-22 21:46:56,496 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 429 Too Many Requests"
+2026-08-22 21:46:56,498 - openai._base_client - INFO - Retrying request to /embeddings in 0.386405 seconds
+2026-08-22 21:46:58,584 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 429 Too Many Requests"
+2026-08-22 21:46:58,586 - openai._base_client - INFO - Retrying request to /embeddings in 0.987645 seconds
+2026-08-22 21:46:59,768 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 429 Too Many Requests"
+2026-08-22 21:50:03,385 - chromadb.telemetry.product.posthog - INFO - Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2026-08-22 21:50:03,881 - chromadb.telemetry.product.posthog - ERROR - Failed to send telemetry event ClientStartEvent: capture() takes 1 positional argument but 3 were given
+2026-08-22 21:50:03,887 - chromadb.telemetry.product.posthog - ERROR - Failed to send telemetry event ClientCreateCollectionEvent: capture() takes 1 positional argument but 3 were given
+2026-08-22 21:50:03,888 - src.data.ingestion - INFO - Vector store initialized at ./chroma_db
+2026-08-22 21:50:04,431 - src.data.ingestion - INFO - Loaded 1 pages from 01_Support_Policy_v3_CURRENT.pdf
+2026-08-22 21:50:04,526 - src.data.ingestion - INFO - Loaded 1 pages from 02_Support_Policy_v2_DEPRECATED.pdf
+2026-08-22 21:50:04,925 - src.data.ingestion - INFO - Loaded 1 pages from 03_Cancellation_and_Service_Credit_SOP_v4.pdf
+2026-08-22 21:50:05,104 - src.data.ingestion - INFO - Loaded 1 pages from 04_Product_Operations_Guide_and_Known_Issues.pdf
+2026-08-22 21:50:05,212 - src.data.ingestion - INFO - Loaded 1 pages from 05_Northstar_Logistics_Enterprise_Agreement.pdf
+2026-08-22 21:50:05,316 - src.data.ingestion - INFO - Loaded 1 pages from 06_LumenWorks_Service_Agreement.pdf
+2026-08-22 21:50:05,327 - src.data.ingestion - INFO - Split documents into 11 chunks
+2026-08-22 21:50:08,970 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 429 Too Many Requests"
+2026-08-22 21:50:08,972 - openai._base_client - INFO - Retrying request to /embeddings in 0.423002 seconds
+2026-08-22 21:50:10,753 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 429 Too Many Requests"
+2026-08-22 21:50:10,754 - openai._base_client - INFO - Retrying request to /embeddings in 0.874856 seconds
+2026-08-22 21:50:11,814 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 429 Too Many Requests"
+2026-08-22 21:52:46,262 - chromadb.telemetry.product.posthog - INFO - Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2026-08-22 21:52:46,758 - chromadb.telemetry.product.posthog - ERROR - Failed to send telemetry event ClientStartEvent: capture() takes 1 positional argument but 3 were given
+2026-08-22 21:52:46,765 - chromadb.telemetry.product.posthog - ERROR - Failed to send telemetry event ClientCreateCollectionEvent: capture() takes 1 positional argument but 3 were given
+2026-08-22 21:52:46,776 - src.data.ingestion - INFO - Vector store initialized at ./chroma_db
+2026-08-22 21:52:47,680 - src.data.ingestion - INFO - Loaded 1 pages from 01_Support_Policy_v3_CURRENT.pdf
+2026-08-22 21:52:47,802 - src.data.ingestion - INFO - Loaded 1 pages from 02_Support_Policy_v2_DEPRECATED.pdf
+2026-08-22 21:52:48,276 - src.data.ingestion - INFO - Loaded 1 pages from 03_Cancellation_and_Service_Credit_SOP_v4.pdf
+2026-08-22 21:52:48,475 - src.data.ingestion - INFO - Loaded 1 pages from 04_Product_Operations_Guide_and_Known_Issues.pdf
+2026-08-22 21:52:48,589 - src.data.ingestion - INFO - Loaded 1 pages from 05_Northstar_Logistics_Enterprise_Agreement.pdf
+2026-08-22 21:52:48,712 - src.data.ingestion - INFO - Loaded 1 pages from 06_LumenWorks_Service_Agreement.pdf
+2026-08-22 21:52:48,722 - src.data.ingestion - INFO - Split documents into 11 chunks
+2026-08-22 21:52:52,607 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 429 Too Many Requests"
+2026-08-22 21:52:52,608 - openai._base_client - INFO - Retrying request to /embeddings in 0.434816 seconds
+2026-08-22 21:52:53,251 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 429 Too Many Requests"
+2026-08-22 21:52:53,253 - openai._base_client - INFO - Retrying request to /embeddings in 0.867743 seconds
+2026-08-22 21:52:54,312 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 429 Too Many Requests"
+2026-08-23 16:17:31,559 - chromadb.telemetry.product.posthog - INFO - Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2026-08-23 16:17:32,130 - chromadb.telemetry.product.posthog - ERROR - Failed to send telemetry event ClientStartEvent: capture() takes 1 positional argument but 3 were given
+2026-08-23 16:17:32,134 - chromadb.telemetry.product.posthog - ERROR - Failed to send telemetry event ClientCreateCollectionEvent: capture() takes 1 positional argument but 3 were given
+2026-08-23 16:17:32,135 - src.data.ingestion - INFO - Vector store initialized at ./chroma_db
+2026-08-23 16:17:32,553 - src.data.ingestion - INFO - Loaded 1 pages from 01_Support_Policy_v3_CURRENT.pdf
+2026-08-23 16:17:32,631 - src.data.ingestion - INFO - Loaded 1 pages from 02_Support_Policy_v2_DEPRECATED.pdf
+2026-08-23 16:17:33,128 - src.data.ingestion - INFO - Loaded 1 pages from 03_Cancellation_and_Service_Credit_SOP_v4.pdf
+2026-08-23 16:17:33,249 - src.data.ingestion - INFO - Loaded 1 pages from 04_Product_Operations_Guide_and_Known_Issues.pdf
+2026-08-23 16:17:33,324 - src.data.ingestion - INFO - Loaded 1 pages from 05_Northstar_Logistics_Enterprise_Agreement.pdf
+2026-08-23 16:17:33,408 - src.data.ingestion - INFO - Loaded 1 pages from 06_LumenWorks_Service_Agreement.pdf
+2026-08-23 16:17:33,414 - src.data.ingestion - INFO - Split documents into 11 chunks
+2026-08-23 16:17:38,097 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 429 Too Many Requests"
+2026-08-23 16:17:38,099 - openai._base_client - INFO - Retrying request to /embeddings in 0.452890 seconds
+2026-08-23 16:17:39,307 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 429 Too Many Requests"
+2026-08-23 16:17:39,308 - openai._base_client - INFO - Retrying request to /embeddings in 0.789014 seconds
+2026-08-23 16:17:40,399 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 429 Too Many Requests"

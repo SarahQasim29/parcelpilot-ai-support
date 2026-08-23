@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParcelPilot AI Support</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f7fa;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 900px;
+            height: 100vh;
+            max-height: 800px;
+            display: flex;
+            flex-direction: column;
+            background: white;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .header {
+            padding: 16px 24px;
+            background: #1a237e;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .header h1 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .header .user-info {
+            font-size: 14px;
+            opacity: 0.9;
+            background: rgba(255,255,255,0.15);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+        .login-section {
+            padding: 16px 24px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e1e4e8;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+            flex-shrink: 0;
+        }
+        .login-section input {
+            padding: 8px 12px;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            font-size: 14px;
+            flex: 1;
+            min-width: 120px;
+        }
+        .login-section input:focus {
+            outline: none;
+            border-color: #1a237e;
+        }
+        .login-section .btn {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .login-section .btn-login {
+            background: #1a237e;
+            color: white;
+        }
+        .login-section .btn-login:hover {
+            background: #0d1445;
+        }
+        .login-section .btn-logout {
+            background: #d32f2f;
+            color: white;
+            display: none;
+        }
+        .login-section .btn-logout:hover {
+            background: #b71c1c;
+        }
+        .login-section .demo-hint {
+            font-size: 12px;
+            color: #6b7280;
+        }
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 24px;
+            background: #fafafa;
+        }
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: #c1c7cd;
+            border-radius: 3px;
+        }
+        .message {
+            margin-bottom: 12px;
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .message .content {
+            max-width: 75%;
+            padding: 10px 16px;
+            border-radius: 12px;
+            line-height: 1.5;
+            word-wrap: break-word;
+            font-size: 14px;
+        }
+        .message.user {
+            justify-content: flex-end;
+        }
+        .message.user .content {
+            background: #1a237e;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+        .message.assistant .content {
+            background: white;
+            color: #1a1a1a;
+            border: 1px solid #e1e4e8;
+            border-bottom-left-radius: 4px;
+        }
+        .message.system .content {
+            background: #fff3e0;
+            color: #e65100;
+            font-size: 13px;
+            border: 1px solid #ffcc80;
+        }
+        .message.confirmation .content {
+            background: #e8f5e9;
+            color: #1b5e20;
+            border: 1px solid #81c784;
+            border-left: 4px solid #4caf50;
+        }
+        .message.error .content {
+            background: #fbe9e7;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+            border-left: 4px solid #f44336;
+        }
+        .message .sender {
+            font-size: 11px;
+            font-weight: 600;
+            color: #6b7280;
+            margin-bottom: 4px;
+        }
+        .confirmation-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .confirmation-actions button {
+            padding: 6px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .confirmation-actions .confirm-btn {
+            background: #4caf50;
+            color: white;
+        }
+        .confirmation-actions .confirm-btn:hover {
+            background: #388e3c;
+        }
+        .confirmation-actions .cancel-btn {
+            background: #f44336;
+            color: white;
+        }
+        .confirmation-actions .cancel-btn:hover {
+            background: #d32f2f;
+        }
+        .input-area {
+            padding: 16px 24px;
+            border-top: 1px solid #e1e4e8;
+            display: flex;
+            gap: 12px;
+            background: white;
+            flex-shrink: 0;
+        }
+        .input-area input {
+            flex: 1;
+            padding: 10px 16px;
+            border: 1px solid #e1e4e8;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .input-area input:focus {
+            border-color: #1a237e;
+        }
+        .input-area input:disabled {
+            background: #f5f5f5;
+        }
+        .input-area button {
+            padding: 10px 24px;
+            background: #1a237e;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .input-area button:hover:not(:disabled) {
+            background: #0d1445;
+        }
+        .input-area button:disabled {
+            background: #b0bec5;
+            cursor: not-allowed;
+        }
+        .status-bar {
+            padding: 6px 24px;
+            font-size: 12px;
+            color: #6b7280;
+            background: #f8f9fa;
+            border-top: 1px solid #e1e4e8;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        .status-bar .status-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+        .status-bar .status-dot.online {
+            background: #4caf50;
+        }
+        .status-bar .status-dot.offline {
+            background: #f44336;
+        }
+        .status-bar .status-dot.processing {
+            background: #ff9800;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        .alert-badge {
+            background: #f44336;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            margin-left: 8px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                max-height: 100vh;
+                border-radius: 0;
+            }
+            .message .content {
+                max-width: 90%;
+            }
+            .login-section {
+                flex-direction: column;
+            }
+            .login-section input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📦 ParcelPilot AI Support</h1>
+            <span class="user-info" id="userInfo">Not logged in</span>
+        </div>
+        
+        <!-- Login Section -->
+        <div class="login-section" id="loginSection">
+            <input type="text" id="userId" placeholder="User ID" value="customer_001">
+            <input type="password" id="password" placeholder="Password" value="pass123">
+            <button class="btn btn-login" onclick="login()">🔑 Login</button>
+            <button class="btn btn-logout" onclick="logout()" id="logoutBtn">🚪 Logout</button>
+            <span class="demo-hint">Demo: customer_001/pass123</span>
+        </div>
+        
+        <!-- Chat Messages -->
+        <div class="chat-messages" id="chatMessages">
+            <div class="message assistant">
+                <div class="content">
+                    <div class="sender">🤖 Assistant</div>
+                    Welcome to ParcelPilot AI Support! Please log in to start chatting.
+                </div>
+            </div>
+        </div>
+
+        <!-- Add this after the chat-messages div -->
+        <div class="tool-indicators" id="toolIndicators" style="
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            max-width: 200px;
+            z-index: 100;
+        ">
+        </div>
+        
+        <!-- Input Area -->
+        <div class="input-area">
+            <input type="text" id="messageInput" placeholder="Type your message..." 
+                   onkeypress="if(event.key==='Enter') sendMessage()" disabled>
+            <button onclick="sendMessage()" id="sendBtn" disabled>Send</button>
+        </div>
+        
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span id="statusText">
+                <span class="status-dot offline" id="statusDot"></span>
+                Disconnected
+            </span>
+            <span id="sessionInfo"></span>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // STATE
+        // ============================================
+        let token = null;
+        let sessionId = null;
+        let currentUser = null;
+        let pendingAction = null;
+        let isProcessing = false;
+
+        // ============================================
+        // DOM REFS
+        // ============================================
+        const chatMessages = document.getElementById('chatMessages');
+        const messageInput = document.getElementById('messageInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const statusText = document.getElementById('statusText');
+        const statusDot = document.getElementById('statusDot');
+        const userInfo = document.getElementById('userInfo');
+        const sessionInfo = document.getElementById('sessionInfo');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        // ============================================
+        // AUTHENTICATION
+        // ============================================
+        function login() {
+            const userId = document.getElementById('userId').value.trim();
+            const password = document.getElementById('password').value.trim();
+            
+            if (!userId || !password) {
+                addMessage('system', '⚠️ Please enter both User ID and Password');
+                return;
+            }
+            
+            setStatus('Connecting...', 'processing');
+            
+            fetch('/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ user_id: userId, password: password })
+            })
+            .then(async res => {
+                if (!res.ok) {
+                    const error = await res.json();
+                    throw new Error(error.detail || 'Login failed');
+                }
+                return res.json();
+            })
+            .then(data => {
+                token = data.token;
+                currentUser = data;
+                
+                // Update UI
+                userInfo.textContent = `${data.role}: ${data.user_id}`;
+                document.querySelector('#loginSection .btn-login').style.display = 'none';
+                logoutBtn.style.display = 'inline-block';
+                messageInput.disabled = false;
+                sendBtn.disabled = false;
+                messageInput.focus();
+                
+                setStatus('Connected', 'online');
+                addMessage('system', `✅ Logged in as ${data.role} (${data.user_id})`);
+                sessionInfo.textContent = `Session: ${data.user_id}`;
+            })
+            .catch(err => {
+                setStatus('Error', 'offline');
+                addMessage('error', `❌ Login failed: ${err.message}`);
+            });
+        }
+
+        function logout() {
+            token = null;
+            sessionId = null;
+            currentUser = null;
+            pendingAction = null;
+            
+            userInfo.textContent = 'Not logged in';
+            document.querySelector('#loginSection .btn-login').style.display = 'inline-block';
+            logoutBtn.style.display = 'none';
+            messageInput.disabled = true;
+            sendBtn.disabled = true;
+            sessionInfo.textContent = '';
+            
+            setStatus('Disconnected', 'offline');
+            addMessage('system', '👋 Logged out');
+            
+            // Clear messages except welcome
+            const welcome = chatMessages.querySelector('.message.assistant');
+            chatMessages.innerHTML = '';
+            if (welcome) chatMessages.appendChild(welcome);
+        }
+
+        // ============================================
+        // CHAT FUNCTIONS
+        // ============================================
+        function sendMessage() {
+            const message = messageInput.value.trim();
+            if (!message || isProcessing || !token) return;
+            
+            isProcessing = true;
+            sendBtn.disabled = true;
+            messageInput.disabled = true;
+            setStatus('Processing...', 'processing');
+            
+            // Add user message
+            addMessage('user', message);
+            messageInput.value = '';
+            
+            const body = { message: message };
+            if (sessionId) body.session_id = sessionId;
+            
+            fetch('/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(body)
+            })
+            .then(async res => {
+                if (!res.ok) {
+                    const error = await res.json();
+                    throw new Error(error.detail || 'Request failed');
+                }
+                return res.json();
+            })
+            .then(data => {
+                sessionId = data.session_id;
+                setStatus('Ready', 'online');
+                
+                if (data.type === 'action_required') {
+                    addMessage('confirmation', data.message);
+                    pendingAction = data.action_data;
+                    addConfirmationButtons();
+                } else if (data.type === 'error') {
+                    addMessage('error', `❌ ${data.message}`);
+                } else {
+                    addMessage('assistant', data.message || 'I processed your request.');
+                }
+            })
+            .catch(err => {
+                setStatus('Error', 'offline');
+                addMessage('error', `❌ ${err.message}`);
+            })
+            .finally(() => {
+                isProcessing = false;
+                sendBtn.disabled = false;
+                messageInput.disabled = false;
+                messageInput.focus();
+            });
+        }
+
+        // ============================================
+        // UI HELPERS
+        // ============================================
+
+        // Add this function to show tool usage
+        function showToolUsage(toolName) {
+            const indicators = document.getElementById('toolIndicators');
+            if (!indicators) return;
+            
+            const toolDiv = document.createElement('div');
+            toolDiv.style.cssText = `
+                background: #1a237e;
+                color: white;
+                padding: 8px 16px;
+                border-radius: 8px;
+                margin-bottom: 8px;
+                font-size: 13px;
+                animation: fadeIn 0.3s ease;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            `;
+            toolDiv.innerHTML = `🔧 Using: ${toolName}`;
+            indicators.appendChild(toolDiv);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                toolDiv.style.opacity = '0';
+                toolDiv.style.transition = 'opacity 0.5s';
+                setTimeout(() => toolDiv.remove(), 500);
+            }, 3000);
+        }
+
+        // Call this from the agent responses
+        // For example, when showing orders:
+        showToolUsage('query_orders');
+
+        function addMessage(type, content) {
+            const div = document.createElement('div');
+            div.className = `message ${type}`;
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'content';
+            
+            // Add sender label for assistant messages
+            if (type === 'assistant') {
+                const sender = document.createElement('div');
+                sender.className = 'sender';
+                sender.textContent = '🤖 Assistant';
+                contentDiv.appendChild(sender);
+            } else if (type === 'user') {
+                const sender = document.createElement('div');
+                sender.className = 'sender';
+                sender.textContent = '👤 You';
+                contentDiv.appendChild(sender);
+            }
+            
+            const textNode = document.createTextNode(content);
+            contentDiv.appendChild(textNode);
+            div.appendChild(contentDiv);
+            
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function addConfirmationButtons() {
+            const container = document.createElement('div');
+            container.className = 'confirmation-actions';
+            
+            const confirmBtn = document.createElement('button');
+            confirmBtn.className = 'confirm-btn';
+            confirmBtn.textContent = '✅ Confirm';
+            confirmBtn.onclick = function() {
+                confirmAction();
+            };
+            
+            const cancelBtn = document.createElement('button');
+            cancelBtn.className = 'cancel-btn';
+            cancelBtn.textContent = '❌ Cancel';
+            cancelBtn.onclick = function() {
+                cancelAction();
+            };
+            
+            container.appendChild(confirmBtn);
+            container.appendChild(cancelBtn);
+            
+            const lastMessage = chatMessages.lastElementChild;
+            if (lastMessage) {
+                lastMessage.querySelector('.content').appendChild(container);
+            }
+        }
+
+        function confirmAction() {
+            if (!pendingAction) return;
+            addMessage('system', '✅ Action confirmed and executed');
+            pendingAction = null;
+            removeConfirmationButtons();
+        }
+
+        function cancelAction() {
+            addMessage('system', '❌ Action cancelled');
+            pendingAction = null;
+            removeConfirmationButtons();
+        }
+
+        function removeConfirmationButtons() {
+            document.querySelectorAll('.confirmation-actions').forEach(el => el.remove());
+        }
+
+        function setStatus(text, state) {
+            statusDot.className = `status-dot ${state}`;
+            statusText.innerHTML = `<span class="status-dot ${state}"></span> ${text}`;
+        }
+
+        // ============================================
+        // AUTO-LOGIN
+        // ============================================
+        // Auto-login on page load with default credentials
+        window.onload = function() {
+            // Optional: Auto-login
+            // setTimeout(login, 500);
+        };
+    </script>
+</body>
+</html>
