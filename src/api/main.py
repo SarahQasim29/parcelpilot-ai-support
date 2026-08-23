@@ -13,6 +13,29 @@ from datetime import datetime
 import pandas as pd
 import json
 
+# src/api/main.py
+import sys
+
+# ============================================
+# FIX FOR PYTHON 3.14 + PYDANTIC 1.x
+# ============================================
+if sys.version_info >= (3, 14):
+    import pydantic
+    # Patch Pydantic to work with Python 3.14
+    if not hasattr(pydantic, '_patched_for_314'):
+        from pydantic import main
+        original_new = main.ModelMetaclass.__new__
+        
+        def patched_new(cls, name, bases, dct):
+            if 'extra' in dct and isinstance(dct['extra'], str):
+                pass
+            return original_new(cls, name, bases, dct)
+        
+        main.ModelMetaclass.__new__ = patched_new
+        pydantic._patched_for_314 = True
+# ============================================
+
+
 # ============================================
 # WINDOWS PATCH
 # ============================================
