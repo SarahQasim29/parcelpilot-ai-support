@@ -1,20 +1,6 @@
 # src/api/main.py
 import os
 import sys
-import logging
-from typing import Optional, Dict
-from fastapi import FastAPI, HTTPException, Header
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import HTMLResponse
-from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
-from dotenv import load_dotenv
-from datetime import datetime
-import pandas as pd
-import json
-
-# src/api/main.py
-import sys
 
 # ============================================
 # FIX FOR PYTHON 3.14 + PYDANTIC 1.x
@@ -34,6 +20,19 @@ if sys.version_info >= (3, 14):
         main.ModelMetaclass.__new__ = patched_new
         pydantic._patched_for_314 = True
 # ============================================
+import logging
+from typing import Optional, Dict
+from fastapi import FastAPI, HTTPException, Header
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel
+from dotenv import load_dotenv
+from datetime import datetime
+#import pandas as pd
+import json
+
+
 
 
 # ============================================
