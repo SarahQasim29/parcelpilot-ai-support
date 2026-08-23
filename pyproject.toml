@@ -1,5 +1,7 @@
 ﻿[project]
-requires-python = ">=3.11,<3.13"
+name = "parcelpilot-ai-support"
+version = "1.0.0"
+requires-python = ">=3.12,<3.13"
 
 [tool.uv]
 python-version = "3.12.8"
