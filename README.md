@@ -2,7 +2,7 @@
 
 **An AI-powered customer support system for a B2B logistics platform**
 
-> Built for the **CalQuity AI Engineer Assessment** - A real AI agent with natural language understanding, tool-calling, multi-step reasoning, and trust-aware responses.
+> A real AI agent with natural language understanding, tool-calling, multi-step reasoning, and trust-aware responses.
 
 ---
 
